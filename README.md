@@ -24,6 +24,7 @@ Framework: Django 5.x.
 Base de Datos: PostgreSQL.
 
 👥 Equipo de Trabajo
+
 Neyder Mendoza (Líder / Backend)
 
 Samuel Cardenas (Desarrollador)

@@ -1,0 +1,57 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div style="display: flex; justify-content: center; padding: 40px 20px;">
+    <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 100%; max-width: 600px; border-top: 5px solid #39A900;">
+        <h2 style="color: #39A900; text-align: center; margin-bottom: 10px;">Editar Usuario</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 25px;">Modificando datos de: <strong>{{ usuario.documento }}</strong></p>
+        
+        <form method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            {% csrf_token %}
+            
+            <div>
+                <label style="font-weight: bold;">Nombres:</label>
+                <input type="text" name="nombres" value="{{ usuario.nombres }}" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label style="font-weight: bold;">Apellidos:</label>
+                <input type="text" name="apellidos" value="{{ usuario.apellidos }}" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div style="grid-column: span 2;">
+                <label style="font-weight: bold;">Correo Electrónico:</label>
+                <input type="email" name="correo" value="{{ usuario.correo }}" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label style="font-weight: bold;">Género:</label>
+                <select name="genero" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;">
+                    <option value="Masculino" {% if usuario.genero == 'Masculino' %}selected{% endif %}>Masculino</option>
+                    <option value="Femenino" {% if usuario.genero == 'Femenino' %}selected{% endif %}>Femenino</option>
+                    <option value="Otro" {% if usuario.genero == 'Otro' %}selected{% endif %}>Otro</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-weight: bold;">Teléfono:</label>
+                <input type="text" name="telefono" value="{{ usuario.telefono }}" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;">
+            </div>
+            <div style="grid-column: span 2;">
+                <label style="font-weight: bold;">Rol del Usuario:</label>
+                <select name="rol" style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc; background: #fff9e6;">
+                    {% for rol in roles %}
+                        <option value="{{ rol.id_rol }}" {% if rol.id_rol == rol_actual.id_rol.id_rol %}selected{% endif %}>
+                            {{ rol.descripcion }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div style="grid-column: span 2; display: flex; gap: 10px; margin-top: 20px;">
+                <button type="submit" style="flex: 2; padding: 12px; background: #39A900; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                    GUARDAR CAMBIOS
+                </button>
+                <a href="{% url 'dashboard' %}" style="flex: 1; text-align: center; padding: 12px; background: #ccc; color: #333; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    CANCELAR
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="slider-container">
+    <div class="slider">
+        <div class="slides">
+            <img src="{% static 'img/nuestra_plataforma.jpeg' %}" alt="Imagen 1">
+            <img src="{% static 'img/sena_inspira.jpeg' %}" alt="Imagen 2">
+            <img src="{% static 'img/animo_comunidadsena.jpeg' %}" alt="Imagen 3">
+            <img src="{% static 'img/fortalece_trabajoenequipo.jpeg' %}" alt="Imagen 4">
+            <img src="{% static 'img/5aspectos.jpeg' %}" alt="Imagen 5">
+        </div>
+    </div>
+</div>
+
+<div class="contenido">
+    <h2>¡Bienvenido a la Comunidad SENA!</h2>
+    <p>BienestarMind es tu plataforma integral para gestionar asesorías, recursos y espacios, mejorando la experiencia de cada aprendiz en nuestro centro de formación.</p>
+    <a href="{% url 'login' %}" class="btn secondary-btn"></a>
+</div>
+{% endblock %}

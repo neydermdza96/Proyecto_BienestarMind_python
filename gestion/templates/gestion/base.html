@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BienestarMind{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'icon/logo-sena-verde-.png' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-header">
+                <img src="{% static 'img/LOGO_BIENESTARMIND.png' %}" alt="Logo">
+            </div>
+            <nav>
+      <ul>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'logout' %}" style="color: #f1ebeb;">Cerrar Sesión</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Iniciar Sesión</a></li> <li><a href="{% url 'registro' %}">Registrarse</a></li>
+        {% endif %}
+    </ul>
+      </nav>
+        </div>
+    </header>
+
+    <main style="margin-top: 100px;">
+        {% if messages %}
+            {% for message in messages %}
+                <div style="padding:15px; background:#f8d7da; color:#721c24; text-align:center; border-radius:10px; max-width:500px; margin: 10px auto; border: 1px solid #f5c6cb;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 BienestarMind - ADSO SENA</p>
+        <div class="social-icons">
+            <a href="#"><img src="{% static 'icon/logo_facebook.png' %}" alt="FB"></a>
+            <a href="#"><img src="{% static 'icon/logo_X.png' %}" alt="X"></a>
+            <a href="#"><img src="{% static 'icon/logo_youtube.png' %}" alt="YT"></a>
+        </div>
+    </footer>
+</body>
+</html>

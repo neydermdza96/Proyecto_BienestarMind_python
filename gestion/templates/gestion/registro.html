@@ -1,0 +1,61 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div style="display: flex; justify-content: center; padding: 40px 20px;">
+    <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 100%; max-width: 600px; border-top: 5px solid #ff6b00;">
+        <h2 style="color: #39A900; text-align: center; margin-bottom: 25px;">Registro BienestarMind</h2>
+        
+        <form method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            {% csrf_token %}
+            
+            <div>
+                <label>Nombres:</label>
+                <input type="text" name="nombres" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label>Apellidos:</label>
+                <input type="text" name="apellidos" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label>Documento:</label>
+                <input type="text" name="documento" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label>Correo:</label>
+                <input type="email" name="correo" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label>Género:</label>
+                <select name="genero" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div>
+                <label>Teléfono:</label>
+                <input type="text" name="telefono" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;">
+            </div>
+            <div>
+                <label>Fecha Nacimiento:</label>
+                <input type="date" name="fecha_nacimiento" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+            <div>
+                <label>Rol en el Sistema:</label>
+                <select name="rol" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;">
+                    {% for rol in roles %}
+                        <option value="{{ rol.id_rol }}">{{ rol.descripcion }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="grid-column: span 2;">
+                <label>Contraseña:</label>
+                <input type="password" name="password" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>
+            </div>
+
+            <button type="submit" style="grid-column: span 2; padding: 12px; background: #39A900; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                CREAR CUENTA
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

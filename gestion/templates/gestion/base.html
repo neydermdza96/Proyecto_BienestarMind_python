@@ -19,6 +19,8 @@
         <li><a href="{% url 'inicio' %}">Inicio</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'listar_programas' %}">Programas</a></li>
+            <li><a href="{% url 'listar_fichas' %}" >Fichas</a></li>
             <li><a href="{% url 'logout' %}" style="color: #f1ebeb;">Cerrar Sesión</a></li>
         {% else %}
             <li><a href="{% url 'login' %}">Iniciar Sesión</a></li> <li><a href="{% url 'registro' %}">Registrarse</a></li>

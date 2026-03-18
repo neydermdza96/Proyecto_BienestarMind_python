@@ -1,0 +1,33 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div style="max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; border-top: 5px solid #39A900; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #39A900; text-align: center;">Editar Ficha: {{ ficha.id_ficha }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label style="font-weight: bold;">Descripción:</label>
+        <input type="text" name="descripcion" value="{{ ficha.descripcion }}" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;" required>
+        
+        <label style="font-weight: bold;">Jornada:</label>
+        <select name="jornada" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+            <option value="Mañana" {% if ficha.jornada_ficha == 'Mañana' %}selected{% endif %}>Mañana</option>
+            <option value="Mixta" {% if ficha.jornada_ficha == 'Mixta' %}selected{% endif %}>Mixta</option>
+            <option value="Nocturna" {% if ficha.jornada_ficha == 'Nocturna' %}selected{% endif %}>Nocturna</option>
+        </select>
+
+        <label style="font-weight: bold;">Programa:</label>
+        <select name="programa" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;">
+            {% for p in programas %}
+                <option value="{{ p.id_programa }}" {% if p.id_programa == ficha.id_programa.id_programa %}selected{% endif %}>
+                    {{ p.nombre_programa }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" style="flex: 2; background: #39A900; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">ACTUALIZAR</button>
+            <a href="{% url 'listar_fichas' %}" style="flex: 1; background: #ccc; color: #333; text-align: center; padding: 12px; text-decoration: none; border-radius: 5px; font-weight: bold;">CANCELAR</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

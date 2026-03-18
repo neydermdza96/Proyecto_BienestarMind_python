@@ -1,0 +1,49 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block title %}Nueva Ficha - BienestarMind{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+    <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; border-top: 6px solid #39A900;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color: #39A900; margin-bottom: 10px;">Registrar Ficha</h2>
+            <p style="color: #666;">Asigne un número de ficha a un programa de formación.</p>
+        </div>
+        
+        <form method="POST">
+    {% csrf_token %}
+    <div style="margin-bottom: 15px;">
+        <label style="display: block; font-weight: bold;">Número de Ficha (ID):</label>
+        <input type="text" name="numero_ficha" placeholder="Ej: 2670687" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label style="display: block; font-weight: bold;">Descripción/Nombre del Grupo:</label>
+        <input type="text" name="descripcion" placeholder="Ej: Análisis y Desarrollo de Software" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label style="display: block; font-weight: bold;">Jornada:</label>
+        <select name="jornada" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+            <option value="Mañana">Mañana</option>
+            <option value="Mixta">Mixta</option>
+            <option value="Nocturna">Nocturna</option>
+        </select>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <label style="display: block; font-weight: bold;">Programa de Formación:</label>
+        <select name="programa" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+            <option value="" disabled selected>Seleccione...</option>
+            {% for programa in programas %}
+                <option value="{{ programa.id_programa }}">{{ programa.nombre_programa }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" style="width: 100%; background: #39A900; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">GUARDAR FICHA</button>
+</form>
+    </div>
+</div>
+{% endblock %}

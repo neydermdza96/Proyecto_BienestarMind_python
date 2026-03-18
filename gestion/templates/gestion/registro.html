@@ -47,6 +47,17 @@
                     {% endfor %}
                 </select>
             </div>
+
+            <div style="grid-column: span 2;">
+                <label>Asignar Ficha (Opcional):</label>
+                <select name="ficha" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc; background-color: #f9f9f9;">
+                    <option value="" selected>Sin ficha / No aplica</option>
+                    {% for f in fichas %}
+                        <option value="{{ f.id_ficha }}">{{ f.id_ficha }} - {{ f.descripcion }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
             <div style="grid-column: span 2;">
                 <label>Contraseña:</label>
                 <input type="password" name="password" style="width:100%; padding:8px; border-radius:5px; border:1px solid #ccc;" required>

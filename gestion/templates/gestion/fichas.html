@@ -1,0 +1,64 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block title %}Gestión de Fichas - BienestarMind{% endblock %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 40px auto; padding: 20px;">
+    <div class="contenido" style="text-align: left; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <div>
+                <h2 style="color: #39A900; margin: 0;">📂 Gestión de Fichas</h2>
+                <p style="color: #666; margin: 5px 0 0 0;">Listado de grupos y programas de formación.</p>
+            </div>
+            <a href="{% url 'crear_ficha' %}" style="background: #39A900; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s;">
+                + Nueva Ficha
+            </a>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #39A900; color: white; text-align: left;">
+                        <th style="padding: 15px; border-bottom: 2px solid #2d8500;">Número de Ficha</th>
+                        <th style="padding: 15px; border-bottom: 2px solid #2d8500;">Programa de Formación</th>
+                        <th style="padding: 15px; border-bottom: 2px solid #2d8500; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ficha in fichas %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; font-weight: bold; color: #333;">{{ ficha.id_ficha }}</td>
+                        <td style="padding: 15px; color: #555;">
+    {% if ficha.id_programa %}
+        {{ ficha.id_programa.nombre_programa }}
+    {% else %}
+        Sin programa
+    {% endif %}
+</td>
+                        <td style="padding: 15px; text-align: center;">
+                            <a href="{% url 'editar_ficha' ficha.id_ficha %}" title="Editar" style="text-decoration: none; margin-right: 15px;">✏️</a>
+                            <a href="{% url 'eliminar_ficha' ficha.id_ficha %}" 
+                                title="Eliminar" 
+                                style="text-decoration: none;" 
+                                onclick="return confirm('¿Estás seguro de eliminar la ficha {{ ficha.id_ficha }}?')">🗑️</a>
+                        </td> 
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" style="padding: 40px; text-align: center; color: #999;">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">📂</div>
+                            No hay fichas registradas aún en el sistema.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <a href="{% url 'dashboard' %}" style="color: #666; text-decoration: none; font-size: 0.9rem;">← Volver al Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

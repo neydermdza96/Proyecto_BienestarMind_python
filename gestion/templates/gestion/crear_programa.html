@@ -1,0 +1,12 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div style="max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; border-top: 5px solid #39A900; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #39A900; text-align: center;">Nuevo Programa</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label style="font-weight: bold;">Nombre del Programa:</label>
+        <input type="text" name="nombre_programa" placeholder="Ej: ADSO" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;" required>
+        <button type="submit" style="width: 100%; background: #39A900; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">GUARDAR</button>
+    </form>
+</div>
+{% endblock %}
